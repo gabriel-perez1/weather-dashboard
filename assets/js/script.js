@@ -1,10 +1,14 @@
+
+//var lastCity = JSON.parse(localStorage.getItem());
+
 function getWeather (cityName) {
-  //apiKey is on config.js to not push it to github
-  var apiKey = config.MY_KEY;
+
+  var apiKey = 'bd528a2ef708579c5c812bf729e6e8f1';
   //format openweather api
+  //var corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
   var apiUrl = "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
   //make a get request to url
-  fetch(apiUrl).then(function(response){
+  fetch(apiUrl, {method: 'GET', mode: 'no-cors'}).then(function(response){
     return response.json()
     .then(function(data) {
       console.log(data);
@@ -12,6 +16,11 @@ function getWeather (cityName) {
   });
 }
 
-window.onload = function() {
-  getWeather("toronto");
-}
+const searchForm = document.querySelector('#citySearch');
+const userInput = document.querySelector('#userInput');
+
+searchForm.addEventListener('click', event =>{
+  event.preventDefault();
+  let cityName = userInput.value;
+  console.log(cityName)
+});
