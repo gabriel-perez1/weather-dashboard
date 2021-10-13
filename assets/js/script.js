@@ -19,9 +19,13 @@ async function getWeather (cityName) {
   const apiUrl = corsURL + "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
   const response = await fetch(apiUrl);
   const data = await response.json();
-  //date
+  var today = new Date();
+  var day = today.getDate();
+  var month = today.getMonth() + 1;
+  var year = today.getFullYear();
+  console.log(day + "/" + month + "/" + year)
   var tempC = data.main.temp - 273;
-  var tempF = (Math.floor(tempC * (9/5) + 32) + "˚F");
+  var tempF = (Math.floor(tempC * (9/5) + 32));
   var hum = data.main.humidity + "%";
   var windS = data.wind.speed + "mph";
   var icon = data.weather[0].icon;
