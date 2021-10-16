@@ -4,7 +4,6 @@ const searchForm = document.querySelector('#citySearch');
 const userInput = document.querySelector('#userInput');
 
 searchForm.addEventListener('click', event =>{
-  event.preventDefault();
   const cityName = userInput.value;
   getWeather(cityName);
   console.log(cityName)
@@ -12,25 +11,28 @@ searchForm.addEventListener('click', event =>{
 });
 
 async function getWeather (cityName) {
-
+  
   const apiKey = 'bd528a2ef708579c5c812bf729e6e8f1';
   //format openweather api
   const corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
   const apiUrl = corsURL + "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
   const response = await fetch(apiUrl);
   const data = await response.json();
+  var city = $("#city").text(cityName)
   var today = new Date();
   var day = today.getDate();
   var month = today.getMonth() + 1;
   var year = today.getFullYear();
-  console.log(day + "/" + month + "/" + year)
+  var fullDate = $("#date").text(month + "/" + day + "/" + year)
   var tempC = data.main.temp - 273;
-  var tempF = (Math.floor(tempC * (9/5) + 32));
+  var tempF = $("#temp").text((Math.floor(tempC * (9/5) + 32) + "°"));
   var hum = data.main.humidity + "%";
   var windS = data.wind.speed + "mph";
   var icon = data.weather[0].icon;
-  var iconUrl = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
-  var iconText = data.weather[0].description;
+  var iconUrl = $('<img>')
+  .attr('src', "http://openweathermap.org/img/wn/" + icon + "@2x.png");
+  var iconImg = $("#icon").append(iconUrl)
+  var iconText = $("#description").text(data.weather[0].description);
   var latitude = data.coord.lat;
   var longitude = data.coord.lon;
 

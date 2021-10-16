@@ -72,3 +72,20 @@ body {
 :focus {
     outline: 0
 }
+
+.card {
+  border-radius: 20px;
+  box-shadow: 0px 8px 16px 4px #9E9E9E;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  width: 775px;
+  height: 275px;
+}
+
+#city::first-letter{
+  text-transform: uppercase;
+}
+
+#description::first-letter {
+  text-transform: uppercase;
+}
