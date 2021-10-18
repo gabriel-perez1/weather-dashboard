@@ -89,3 +89,7 @@ body {
 #description::first-letter {
   text-transform: uppercase;
 }
+
+#icon {
+  display: inline;
+}
