@@ -77,12 +77,10 @@ body {
   border-radius: 20px;
   box-shadow: 0px 8px 16px 4px #9E9E9E;
   background-color: #badcec;
-  margin-top: 0px;
-  margin-bottom: 50px;
-  margin-left: 50px;
-  margin-right: 25px;
-  max-width: 675px;
+  margin: 20px;
+  max-width: 600px;
   height: 270px;
+  padding-top: 20px;
   padding-left: 50px;
   padding-right: 50px;
 }
@@ -91,9 +89,7 @@ body {
   border-radius: 20px;
   box-shadow: 0px 8px 16px 4px #9E9E9E;
   background-color: #badcec;
-  margin-top: 0px;
-  margin-bottom: 20px;
-  margin-left: 25px;
+  margin: 25px;
   width: 275px;
   height: 270px;
   padding-top: 20px;
