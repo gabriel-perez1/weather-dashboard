@@ -1,27 +1,28 @@
-
-//var lastCity = JSON.parse(localStorage.getItem());
+//api key
+const apiKey = 'bd528a2ef708579c5c812bf729e6e8f1';
+// deployed cors-anywhere package
+const corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
 const searchForm = document.querySelector('#citySearch');
 const userInput = document.querySelector('#userInput');
+
+
 
 searchForm.addEventListener('click', event =>{
   const cityName = userInput.value;
   getWeather(cityName);
-
-  console.log(cityName)
-
+  get5DWeather(cityName);
 });
 
 async function getWeather (cityName) {
+  // updates card that will display current weather info
   $("#dayCard").remove();
   $("<div id ='dayCard' class='card'>").appendTo("#container");
-  //api key
-  const apiKey = 'bd528a2ef708579c5c812bf729e6e8f1';
+  
   //format openweather api and fecth
-  const corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
   const apiUrl = corsURL + "api.openweathermap.org/data/2.5/weather?q=" + cityName + "&appid=" + apiKey;
   const response = await fetch(apiUrl);
   
-  //variables with desired api info
+  //variables with desired api info and card location
   const data = await response.json();
   var city = $("<h2 id='city'>").addClass("ml-auto mr-4 mt-3 mb-0").text(cityName).appendTo("#dayCard");
   var today = new Date();
@@ -41,10 +42,23 @@ async function getWeather (cityName) {
   var latitude = data.coord.lat;
   var longitude = data.coord.lon;
 
-  const apiURL5D = corsURL + "api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
-  const response5D = await fetch(apiURL5D);
-  const data5D = await response5D.json();
-  console.log(data5D);
-  var UV = data5D.current.uvi;
+  const apiUrlUv = corsURL + "api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
+  const responseUv = await fetch(apiUrlUv);
+  const dataUv = await responseUv.json();
+  console.log(dataUv);
+  var UV = dataUv.current.uvi;
   console.log(UV);
 }
+
+async function get5DWeather (cityName) {
+  // format openweather 5d api and fetch
+  const api5DUrl = corsURL + "api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apiKey;
+  const response5D = await fetch(api5DUrl);
+  
+  //variables with desired api info and card location
+  const data5d = await response5D.json();
+  console.log(data5d)
+}
+
+
+
