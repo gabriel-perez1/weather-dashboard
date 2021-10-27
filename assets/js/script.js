@@ -5,13 +5,20 @@ const corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
 const searchForm = document.querySelector('#citySearch');
 const userInput = document.querySelector('#userInput');
 
-
-
 searchForm.addEventListener('click', event =>{
   const cityName = userInput.value;
   getWeather(cityName);
   get5DWeather(cityName);
+  getSearch(cityName);
 });
+
+function getSearch (cityName){
+  let lastSearch = [];
+  lastSearch.push(cityName)
+  localStorage.setItem('searchHistory', JSON.stringify(lastSearch));
+  let lastCity = JSON.parse(localStorage.getItem('searchHistory'));
+  var searchHistory = $("<li>").text(lastCity).appendTo("#searchList");
+}
 
 async function getWeather (cityName) {
   // updates card that will display current weather info
@@ -59,6 +66,3 @@ async function get5DWeather (cityName) {
   const data5d = await response5D.json();
   console.log(data5d)
 }
-
-
-

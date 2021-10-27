@@ -92,9 +92,7 @@ body {
   margin: 20px;
   width: 275px;
   height: 270px;
-  padding-top: 20px;
-  padding-left: 25px;
-  padding-right: 25px;
+  padding: 20px;
 }
 
 #city::first-letter{
@@ -102,6 +100,10 @@ body {
 }
 
 #description::first-letter {
+  text-transform: uppercase;
+}
+
+#searchList::first-letter {
   text-transform: uppercase;
 }
 
