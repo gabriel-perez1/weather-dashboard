@@ -12,13 +12,20 @@ searchForm.addEventListener('click', event =>{
   getSearch(cityName);
 });
 
+// stores search history
 function getSearch (cityName){
   let lastSearch = [];
   lastSearch.push(cityName)
   localStorage.setItem('searchHistory', JSON.stringify(lastSearch));
   let lastCity = JSON.parse(localStorage.getItem('searchHistory'));
-  var searchHistory = $("<li>").text(lastCity).appendTo("#searchList");
+  var searchHistory = $("<li id='searches'>").text(lastCity).appendTo("#searchList");
 }
+
+// clear history
+
+$("#clearSearch").click(function() {
+  $("#searches").remove();
+})
 
 async function getWeather (cityName) {
   // updates card that will display current weather info

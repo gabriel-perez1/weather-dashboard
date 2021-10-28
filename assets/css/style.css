@@ -103,10 +103,14 @@ body {
   text-transform: uppercase;
 }
 
-#searchList::first-letter {
+#searches::first-letter {
   text-transform: uppercase;
 }
 
 #icon {
   display: inline;
+}
+
+#clearSearch {
+  margin-top: auto;
 }
