@@ -91,7 +91,7 @@ body {
   background-color: #badcec;
   margin: 20px;
   width: 275px;
-  height: 270px;
+  min-height: 270px;
   padding: 20px;
 }
 
@@ -103,7 +103,7 @@ body {
   text-transform: uppercase;
 }
 
-#searches::first-letter {
+.searches::first-letter {
   text-transform: uppercase;
 }
 
@@ -113,4 +113,8 @@ body {
 
 #clearSearch {
   margin-top: auto;
+}
+
+ul li {
+  cursor: pointer;
 }

@@ -2,15 +2,23 @@
 const apiKey = 'bd528a2ef708579c5c812bf729e6e8f1';
 // deployed cors-anywhere package
 const corsURL = "https://cors-anywhere-gabriel-perez1.herokuapp.com/";
-const searchForm = document.querySelector('#citySearch');
 const userInput = document.querySelector('#userInput');
 
-searchForm.addEventListener('click', event =>{
-  const cityName = userInput.value;
+$('#citySearch').on('click', event =>{
+  let cityName = userInput.value;
   getWeather(cityName);
   get5DWeather(cityName);
   getSearch(cityName);
 });
+
+$('#userInput').keypress(function(event){
+  var keycode = (event.keyCode ? event.keyCode : event.which);
+  if(keycode == '13'){
+    let cityName = userInput.value;
+    getWeather(cityName);
+    get5DWeather(cityName);
+    getSearch(cityName);
+}})
 
 // stores search history
 function getSearch (cityName){
@@ -18,13 +26,21 @@ function getSearch (cityName){
   lastSearch.push(cityName)
   localStorage.setItem('searchHistory', JSON.stringify(lastSearch));
   let lastCity = JSON.parse(localStorage.getItem('searchHistory'));
-  var searchHistory = $("<li id='searches'>").text(lastCity).appendTo("#searchList");
+  var searchHistory = $("<li id='searchItem'>").addClass("searches").text(lastCity).appendTo("#searchList");
 }
+
+// calls stored search history when list item is clicked 
+$(".history").on('click', 'li', (function() {
+  let cityName = $(this).text();
+  getWeather(cityName);
+  get5DWeather(cityName);
+}))
+
 
 // clear history
 
 $("#clearSearch").click(function() {
-  $("#searches").remove();
+  $("#searchList").empty();
 })
 
 async function getWeather (cityName) {
