@@ -118,3 +118,15 @@ body {
 ul li {
   cursor: pointer;
 }
+
+.searches {
+    transform: translateZ(0);
+    transition-duration: 0.3s;
+    transition-property: transform;
+}
+
+.searches:hover,
+.searches:focus,
+.searches:active {
+    transform: scale(1.1);
+}
