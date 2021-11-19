@@ -7,7 +7,6 @@ const userInput = document.querySelector('#userInput');
 $('#citySearch').on('click', event =>{
   let cityName = userInput.value;
   getWeather(cityName);
-  get5DWeather(cityName);
   getSearch(cityName);
 });
 
@@ -16,7 +15,6 @@ $('#userInput').keypress(function(event){
   if(keycode == '13'){
     let cityName = userInput.value;
     getWeather(cityName);
-    get5DWeather(cityName);
     getSearch(cityName);
 }})
 
@@ -33,7 +31,6 @@ function getSearch (cityName){
 $(".history").on('click', 'li', (function() {
   let cityName = $(this).text();
   getWeather(cityName);
-  get5DWeather(cityName);
 }))
 
 
@@ -75,17 +72,23 @@ async function getWeather (cityName) {
   const apiUrlUv = corsURL + "api.openweathermap.org/data/2.5/onecall?lat=" + latitude + "&lon=" + longitude + "&appid=" + apiKey;
   const responseUv = await fetch(apiUrlUv);
   const dataUv = await responseUv.json();
-  console.log(dataUv);
   var UV = dataUv.current.uvi;
-  console.log(UV);
-}
 
-async function get5DWeather (cityName) {
   // format openweather 5d api and fetch
   const api5DUrl = corsURL + "api.openweathermap.org/data/2.5/forecast?q=" + cityName + "&units=imperial&appid=" + apiKey;
   const response5D = await fetch(api5DUrl);
   
   //variables with desired api info and card location
   const data5d = await response5D.json();
-  console.log(data5d)
+  $("#fiveRow").empty();
+
+  for (var i = 0; i < 5; i += 1) {
+    var fiveCard = $("<div id ='fiveCard' class='card'>").appendTo("#fiveRow");
+    var plusDate = today.getTime() + 86400000 * (i+1);
+    var nextDate = new Date (plusDate);
+    var nextDay = nextDate.getDate();
+    var nextMonth = nextDate.getMonth() + 1;
+    var nextYear = nextDate.getFullYear();
+    var fiveDate = $("<p id='5date'>").addClass("card-title").text(nextMonth + "/" + nextDay + "/" + nextYear).appendTo("#fiveCard");
+  }
 }
